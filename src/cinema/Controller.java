@@ -1,7 +1,5 @@
 package cinema;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,12 @@ public class Controller {
     }
 
     @PostMapping("/return")
-    public ResponseEntity<Map<String, Seat>> returnSeat(@RequestBody Map<String,String> token) {
+    public ResponseEntity<Map<String, Seat>> returnSeat(@RequestBody Map<String, String> token) {
         return bookingService.returnSeat(token.get("token"));
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Integer>> stats(@RequestParam Map<String, String> params) {
+        return bookingService.showStats(params.getOrDefault("password", ""));
     }
 }

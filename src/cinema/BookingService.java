@@ -2,9 +2,8 @@ package cinema;
 
 import cinema.exceptions.PlaceIsTakenException;
 import cinema.exceptions.RowColumnOutOfBoundException;
+import cinema.exceptions.WrongPasswordException;
 import cinema.exceptions.WrongTokenException;
-import org.springframework.boot.actuate.endpoint.web.Link;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -61,6 +60,19 @@ public class BookingService {
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType("application/json"))
                     .body(Map.of("ticket", targetSeat));
+        }
+    }
+    public ResponseEntity<Map<String,Integer>> showStats(String password) throws RuntimeException{
+        if (!password.equals("super_secret")) {
+            throw new WrongPasswordException("The password is wrong!");
+        } else {
+            Map<String, Integer> response = new LinkedHashMap<>();
+            response.put("income", takenSeats.values().stream().map(Seat::getPrice).reduce(0, Integer::sum));
+            response.put("available", cinema.getSeats().length);
+            response.put("purchased", takenSeats.size());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("application/json"))
+                    .body(response);
         }
     }
 }

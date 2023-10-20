@@ -36,8 +36,9 @@ public class Cinema {
     }
 
     public Seat getSeat(int row, int col) {
-        return seats[(row - 1) * row + col - 1];
+        return seats[(row - 1) * columns + col - 1];
     }
+
     public Seat[] getSeats() {
         return Arrays.stream(seats).filter(Predicate.not(Seat::isTaken)).toArray(Seat[]::new);
     }

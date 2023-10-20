@@ -40,7 +40,8 @@ public class Seat {
         return isTaken;
     }
 
-    public void purchase() {
-        isTaken = true;
+    public void setTaken(boolean taken) {
+        isTaken = taken;
     }
+
 }

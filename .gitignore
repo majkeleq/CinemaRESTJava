@@ -1,0 +1,22 @@
+# Pliki tymczasowe
+.log
+.tmp
+
+# Pliki konfiguracyjne
+config.ini
+settings.conf
+
+# Katalogi generowane
+build/
+dist/
+node_modules/
+target/
+test/
+
+# Pliki IDE
+.idea
+
+# Pliki wyjściowe kompilacji
+.class
+.jar
+.war

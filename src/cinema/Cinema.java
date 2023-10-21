@@ -1,16 +1,23 @@
 package cinema;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+@Component
 public class Cinema {
+    @Value("9")
     private int rows;
-    private int columns;
-    private final Seat[] seats;
 
-    public Cinema(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
+    @Value("9")
+    private int columns;
+    private Seat[] seats;
+
+    @PostConstruct
+    void init() {
         seats = new Seat[rows * columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {

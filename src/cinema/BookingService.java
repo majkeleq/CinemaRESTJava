@@ -4,18 +4,22 @@ import cinema.exceptions.PlaceIsTakenException;
 import cinema.exceptions.RowColumnOutOfBoundException;
 import cinema.exceptions.WrongPasswordException;
 import cinema.exceptions.WrongTokenException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Component
 public class BookingService {
-    Cinema cinema;
+    private Cinema cinema;
     Map<UUID, Seat> takenSeats = new HashMap<>();
 
+    @Autowired
     public BookingService(Cinema cinema) {
         this.cinema = cinema;
     }

@@ -1,5 +1,6 @@
 package cinema;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +9,12 @@ import java.util.Map;
 @RestController
 public class Controller {
     //private final Cinema cinema = new Cinema(9, 9);
-    private final BookingService bookingService = new BookingService(new Cinema(9, 9));
+
+    private final BookingService bookingService;
+    @Autowired
+    public Controller( BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
 
     @GetMapping("/seats")
     public Cinema getCinema() {
